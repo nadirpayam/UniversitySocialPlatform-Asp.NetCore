@@ -1,0 +1,12 @@
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\bin\Debug\net5.0\EntityLayer.deps.json
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\bin\Debug\net5.0\EntityLayer.dll
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\bin\Debug\net5.0\ref\EntityLayer.dll
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\bin\Debug\net5.0\EntityLayer.pdb
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\obj\Debug\net5.0\EntityLayer.csproj.AssemblyReference.cache
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\obj\Debug\net5.0\EntityLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\obj\Debug\net5.0\EntityLayer.AssemblyInfoInputs.cache
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\obj\Debug\net5.0\EntityLayer.AssemblyInfo.cs
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\obj\Debug\net5.0\EntityLayer.csproj.CoreCompileInputs.cache
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\obj\Debug\net5.0\EntityLayer.dll
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\obj\Debug\net5.0\ref\EntityLayer.dll
+C:\Users\nadirpayam\Desktop\MyProjects\UniversitySocialPlatform\EntityLayer\obj\Debug\net5.0\EntityLayer.pdb
