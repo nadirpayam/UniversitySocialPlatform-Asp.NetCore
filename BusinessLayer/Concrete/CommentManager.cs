@@ -40,7 +40,7 @@ namespace BusinessLayer.Concrete
 
         public List<Comment> GetList(int id)
         {
-            return _commentDal.GetListAll(x=>x.CommentID==id);
+            return _commentDal.GetListAll(x=>x.PostID==id);
         }
 
         public List<Comment> GetList()

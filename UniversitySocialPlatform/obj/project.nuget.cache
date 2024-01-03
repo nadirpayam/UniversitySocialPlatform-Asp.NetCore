@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "XT4xUMgAtw9TTeXI+S24dmw8xm5txCWoIT8sC6CISe6JuuCSVmRvXlPCZ/aaOGTfnXusO5RSjXobzNhz3PIrTg==",
+  "dgSpecHash": "gk2UfFbDOXVmGqGm4cDUzueONGNyMOP/+OUiY75V5rAQhLUrK6hDY0eRpKZXat84lzadmD2TY1gNMUbenDwK1Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\nadirpayam\\Desktop\\MyProjects\\UniversitySocialPlatform\\UniversitySocialPlatform\\UniversitySocialPlatform.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\nadirpayam\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\nadirpayam\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\nadirpayam\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\nadirpayam\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\nadirpayam\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\nadirpayam\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",

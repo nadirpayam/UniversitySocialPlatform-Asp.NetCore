@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,19 @@ namespace UniversitySocialPlatform.Controllers
             return View();
         }
 
+        [HttpGet]
         public PartialViewResult PartialAddComment()
         {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public PartialViewResult PartialAddComment(Comment c)
+        {
+            c.CommentCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            c.CommentStatus = true;
+            c.PostID = 1;
+            cm.CommentAdd(c);
             return PartialView();
         }
 

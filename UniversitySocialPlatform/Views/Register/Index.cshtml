@@ -1,0 +1,69 @@
+﻿@model EntityLayer.Concrete.Learner
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+<link href="~/USPTema/css/single.css" rel='stylesheet' type='text/css' />
+<link href="~/USPTema/css/style.css" rel='stylesheet' type='text/css' />
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Kayıt Ol</h3>
+        <div class="inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+              @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+              {
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Adınız</label>
+                            @Html.TextBoxFor(x=>x.LearnerName, new {@class="form-control"})
+                            @Html.ValidationMessageFor(x=>x.LearnerName,"", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Soyadınız</label>
+                            @Html.TextBoxFor(x => x.LearnerSurname, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.LearnerSurname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Görsel</label>
+                            @Html.TextBoxFor(x => x.LearnerImage, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.LearnerImage, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Mail</label>
+                            @Html.TextBoxFor(x => x.LearnerMail, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.LearnerMail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Şifre</label>
+                            @Html.TextBoxFor(x => x.LearnerPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.LearnerPassword, "", new { @class = "text-danger" })
+                           </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit mb-4">Kayıt Ol</button>
+                    <p>
+                        <a href="#" id="rules">Tüm şartları okudum,kabul ediyorum!</a>
+                    </p>
+              }
+
+            </div>
+        </div>
+    </div>
+    <br />
+    <script>
+        $('#rules').click(function () {
+            swal("Site Kabul Şartları","Tüm şartları okudum.");
+        })
+    </script>
+
+</section>
+
+
+

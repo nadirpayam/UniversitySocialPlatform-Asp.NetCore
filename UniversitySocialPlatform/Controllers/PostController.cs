@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace UniversitySocialPlatform.Controllers
 {
+    [AllowAnonymous]
     public class PostController : Controller
     {
         PostManager pm = new PostManager(new EFPostRepository());
@@ -19,8 +21,10 @@ namespace UniversitySocialPlatform.Controllers
 
         public IActionResult PostReadAll(int id)
         {
+            ViewBag.PostId = id;
             var values = pm.GetPostById(id);
             return View(values);
         }
+
     }
 }

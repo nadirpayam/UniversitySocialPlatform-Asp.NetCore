@@ -22,5 +22,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<LearnerType> LearnerTypes { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<NewsLetter> NewsLetters { get; set; }
     }
 }

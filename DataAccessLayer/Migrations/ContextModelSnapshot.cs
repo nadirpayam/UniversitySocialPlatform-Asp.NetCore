@@ -167,6 +167,24 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("LearnerTypes");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.NewsLetter", b =>
+                {
+                    b.Property<int>("MailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("MailStatus")
+                        .HasColumnType("bit");
+
+                    b.HasKey("MailID");
+
+                    b.ToTable("NewsLetters");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Post", b =>
                 {
                     b.Property<int>("PostID")

@@ -33,6 +33,11 @@ namespace BusinessLayer.Concrete
             return _postDal.GetListAll();
         }
 
+        public List<Post> GetLast3Post()
+        {
+            return _postDal.GetListAll().Take(3).ToList();
+        }
+
         public List<Post> GetListWithSectionLearner()
         {
             return _postDal.GetListWithSectionLearner();
@@ -56,6 +61,11 @@ namespace BusinessLayer.Concrete
         public List<Post> GetList()
         {
             throw new NotImplementedException();
+        }
+
+        public List<Post> GetPostListByLearner(int id)
+        {
+            return _postDal.GetListAll(x => x.LearnerID == id);
         }
     }
 }
