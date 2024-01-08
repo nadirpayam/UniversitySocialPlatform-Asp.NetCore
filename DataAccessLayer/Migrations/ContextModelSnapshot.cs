@@ -74,6 +74,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("PostID")
                         .HasColumnType("int");
 
+                    b.Property<int>("PostScore")
+                        .HasColumnType("int");
+
                     b.HasKey("CommentID");
 
                     b.HasIndex("PostID");
@@ -167,6 +170,70 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("LearnerTypes");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Message", b =>
+                {
+                    b.Property<int>("MessageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MessageDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("MessageStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Receiver")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageID");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Messages", b =>
+                {
+                    b.Property<int>("MessageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MessageDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("MessageStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ReceiverID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SenderID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageID");
+
+                    b.HasIndex("ReceiverID");
+
+                    b.HasIndex("SenderID");
+
+                    b.ToTable("AllMessages");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.NewsLetter", b =>
                 {
                     b.Property<int>("MailID")
@@ -183,6 +250,36 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("MailID");
 
                     b.ToTable("NewsLetters");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Notification", b =>
+                {
+                    b.Property<int>("NotificationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NotificationColor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NotificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NotificationDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NotificationStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NotificationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotificationTypeSymbol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NotificationID");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Post", b =>
@@ -223,6 +320,27 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("SectionID");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.PostRating", b =>
+                {
+                    b.Property<int>("PostRatingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PostID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PostRatingCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PostTotalScore")
+                        .HasColumnType("int");
+
+                    b.HasKey("PostRatingID");
+
+                    b.ToTable("PostRatings");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Section", b =>
@@ -268,6 +386,21 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("LearnerType");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Messages", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Learner", "ReceiverLearner")
+                        .WithMany("LearnerReceiver")
+                        .HasForeignKey("ReceiverID");
+
+                    b.HasOne("EntityLayer.Concrete.Learner", "SenderLearner")
+                        .WithMany("LearnerSender")
+                        .HasForeignKey("SenderID");
+
+                    b.Navigation("ReceiverLearner");
+
+                    b.Navigation("SenderLearner");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Post", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Learner", "Learner")
@@ -289,6 +422,10 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Learner", b =>
                 {
+                    b.Navigation("LearnerReceiver");
+
+                    b.Navigation("LearnerSender");
+
                     b.Navigation("Posts");
                 });
 

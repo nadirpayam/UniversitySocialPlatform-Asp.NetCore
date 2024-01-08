@@ -18,7 +18,7 @@ namespace BusinessLayer.Concrete
             _postDal = postDal;
         }
 
-        public Post GetById(int id)
+        public Post TGetById(int id)
         {
             return _postDal.GetById(id);
         }
@@ -26,11 +26,6 @@ namespace BusinessLayer.Concrete
         public List<Post> GetPostById(int id)
         {
             return _postDal.GetListAll(x=>x.PostID==id);
-        }
-
-        public List<Post> GetListAll()
-        {
-            return _postDal.GetListAll();
         }
 
         public List<Post> GetLast3Post()
@@ -43,29 +38,34 @@ namespace BusinessLayer.Concrete
             return _postDal.GetListWithSectionLearner();
         }
 
-        public void PostAdd(Post s)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PostDelete(Post s)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PostUpdate(Post s)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Post> GetList()
         {
-            throw new NotImplementedException();
+            return _postDal.GetListAll();
         }
 
         public List<Post> GetPostListByLearner(int id)
         {
             return _postDal.GetListAll(x => x.LearnerID == id);
+        }
+
+        public List<Post> GetListWithSectionByLearnerPm(int id)
+        {
+            return _postDal.GetListWithSectionByLearner(id);
+        }
+
+        public void TAdd(Post t)
+        {
+            _postDal.Insert(t);
+        }
+
+        public void TDelete(Post t)
+        {
+            _postDal.Delete(t);
+        }
+
+        public void TUpdate(Post t)
+        {
+            _postDal.Update(t);
         }
     }
 }

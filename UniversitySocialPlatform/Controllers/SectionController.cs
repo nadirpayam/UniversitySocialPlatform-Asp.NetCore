@@ -16,5 +16,7 @@ namespace UniversitySocialPlatform.Controllers
             var values = sm.GetList();
             return View(values);
         }
+
+       
     }
 }

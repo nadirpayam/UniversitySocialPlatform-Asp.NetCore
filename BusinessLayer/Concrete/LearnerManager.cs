@@ -18,9 +18,35 @@ namespace BusinessLayer.Concrete
             _leaernerDal = leaernerDal;
         }
 
-        public void LeanerAdd(Learner s)
+        public List<Learner> GetLearnerById(int id)
         {
-            _leaernerDal.Insert(s);
+            return _leaernerDal.GetListAll(x => x.LearnerID == id);
+        }
+
+        public List<Learner> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        
+        public void TAdd(Learner t)
+        {
+            _leaernerDal.Insert(t);
+        }
+
+        public void TDelete(Learner t)
+        {
+            _leaernerDal.Delete(t);
+        }
+
+        public Learner TGetById(int id)
+        {
+            return _leaernerDal.GetById(id);
+        }
+
+        public void TUpdate(Learner t)
+        {
+            _leaernerDal.Update(t);
         }
     }
 }

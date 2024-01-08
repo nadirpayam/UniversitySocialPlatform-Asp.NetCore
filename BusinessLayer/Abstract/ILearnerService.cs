@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface ILearnerService
+    public interface ILearnerService: IGenericService<Learner>
     {
-        void LeanerAdd(Learner s);
+        List<Learner> GetLearnerById(int id);
     }
 }

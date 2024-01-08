@@ -15,6 +15,21 @@ namespace DataAccessLayer.Concrete
             optionsBuilder.UseSqlServer("server=LAPTOP-LNMPQIK9;database=UniversitySocialPlatform; integrated security=true;");
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Messages>()
+                .HasOne(x => x.SenderLearner)
+                .WithMany(y => y.LearnerSender)
+                .HasForeignKey(z => z.SenderID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            builder.Entity<Messages>()
+               .HasOne(x => x.ReceiverLearner)
+               .WithMany(y => y.LearnerReceiver)
+               .HasForeignKey(z => z.ReceiverID)
+               .OnDelete(DeleteBehavior.ClientSetNull);
+        }
+
         public DbSet<About> Abouts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> Contacts{ get; set; }
@@ -23,5 +38,9 @@ namespace DataAccessLayer.Concrete
         public DbSet<Post> Posts { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<NewsLetter> NewsLetters { get; set; }
+        public DbSet<PostRating> PostRatings { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Messages> AllMessages { get; set; }
     }
 }

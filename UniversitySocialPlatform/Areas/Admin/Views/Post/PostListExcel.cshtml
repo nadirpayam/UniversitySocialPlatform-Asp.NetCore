@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "PostListExcel";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Gönderi Excel</h1>
+
+<br />
+
+<a href="/Admin/Post/ExportStaticExcelPostList/" class="btn btn-primary" onclick="DownloadExcelPostList()">Excel Listesini İndir</a>
+
+<script>
+    function DownloadExcelPostList() {
+        wind.open("/Admin/Post/ExportStaticExcelPostList/");
+    }
+</script>
+

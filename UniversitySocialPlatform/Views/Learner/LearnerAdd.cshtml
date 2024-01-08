@@ -1,0 +1,46 @@
+﻿@model EntityLayer.Concrete.Learner
+
+@{
+    ViewData["Title"] = "LearnerAdd";
+    Layout = "~/Views/Shared/LearnerLayout.cshtml";
+}
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Eğitici Profil Bilgileri Düzenleme</h4> <br />
+                @Html.HiddenFor(x => x.LearnerID, new { @class = "form-control" })
+                <div class="forms-sample">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Ad</label>
+                        @Html.TextBoxFor(x => x.LearnerName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Soyad</label>
+                        @Html.TextBoxFor(x => x.LearnerSurname, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Mail</label>
+                        @Html.TextBoxFor(x => x.LearnerMail, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Şifre</label>
+                        <input type="password" class="form-control" name="LearnerPassword" id="exampleInputCity1" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label>Görsel</label>
+                        <input type="file" name="LearnerImage" /> 
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Hakkında</label>
+                        @Html.TextAreaFor(x => x.LearnerAbout, 10, 3, new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">Kaydet</button>
+                    <button class="btn btn-light">İptal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

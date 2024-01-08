@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IPostService
+    public interface IPostService: IGenericService<Post>
     {
-        void PostAdd(Post s);
-        void PostDelete(Post s);
-        void PostUpdate(Post s);
-        List<Post> GetList();
-        Post GetById(int id);
         List<Post> GetListWithSectionLearner();
         List<Post> GetPostListByLearner(int id);
+        List<Post> GetPostById(int id);
     }
 }

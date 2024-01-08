@@ -1,0 +1,24 @@
+﻿@model EntityLayer.Concrete.Post
+
+@{
+    ViewData["Title"] = "EditPost";
+    Layout = "~/Views/Shared/LearnerLayout.cshtml";
+}
+
+<h1>Gönderi Düzenleme Sayfası</h1>
+
+@using (Html.BeginForm("EditPost", "Post", FormMethod.Post))
+{
+    @Html.Label("Post ID")
+    @Html.TextBoxFor(x => x.PostID, new { @class = "form-control" })
+    <br />
+    @Html.Label("Gönderi Başlığı")
+    @Html.TextBoxFor(x => x.PostTitle, new { @class = "form-control" })
+    <br />
+    @Html.Label("Gönderi İçeriği")
+    @Html.TextAreaFor(x => x.PostContent, 10, 3, new { @class = "form-control" })
+    <br />
+    @Html.Label("Bölüm")
+    @Html.DropDownListFor(x => x.SectionID, (List<SelectListItem>)ViewBag.sv, new { @class = "form-control" })
+    <button class="btn btn-success">Güncelle</button>
+}

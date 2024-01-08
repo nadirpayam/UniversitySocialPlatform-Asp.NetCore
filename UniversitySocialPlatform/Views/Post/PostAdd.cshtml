@@ -1,0 +1,29 @@
+﻿@model EntityLayer.Concrete.Post
+
+@{
+    ViewData["Title"] = "PostAdd";
+    Layout = "~/Views/Shared/LearnerLayout.cshtml";
+}
+
+<h1>Yeni Gönderi Girişi</h1>
+<br />
+
+@using (Html.BeginForm("PostAdd", "Post", FormMethod.Post))
+{
+    @Html.Label("Gönderi Başlığı")
+    @Html.TextBoxFor(x => x.PostTitle, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.PostTitle)
+    <br />
+    @Html.Label("Gönderi İçeriği")
+    @Html.TextAreaFor(x => x.PostContent,10,3, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.PostContent)
+    <br />
+    @Html.Label("Bölüm")
+    @Html.DropDownListFor(x=>x.SectionID,(List<SelectListItem>)ViewBag.sv, new { @class = "form-control" })
+    <br />
+    @Html.Label("Gönderi Küçük Resmi")
+    @Html.TextBoxFor(x => x.PostThumbnailImage , new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.PostThumbnailImage )
+    <br />
+    <button class="btn btn-info">Gönderiyi Kaydet</button>
+}

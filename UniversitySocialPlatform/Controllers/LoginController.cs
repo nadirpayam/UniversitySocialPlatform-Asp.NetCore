@@ -12,18 +12,15 @@ using System.Threading.Tasks;
 
 namespace UniversitySocialPlatform.Controllers
 {
+  [AllowAnonymous]
     public class LoginController : Controller
     {
-       
-     
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Index(Learner p)
         {
@@ -39,7 +36,7 @@ namespace UniversitySocialPlatform.Controllers
                 var learnerIdentity = new ClaimsIdentity(claims,"a");
                 ClaimsPrincipal principal = new ClaimsPrincipal(learnerIdentity);
                 await HttpContext.SignInAsync(principal);
-                return RedirectToAction("Index", "Learner");
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {

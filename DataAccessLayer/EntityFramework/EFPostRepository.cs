@@ -13,6 +13,15 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFPostRepository : GenericRepository<Post>, IPostDal
     {
+        public List<Post> GetListWithSectionByLearner(int id)
+        {
+            using (var c = new Context())
+            {
+                return c.Posts.Include(x => x.Section).Where(
+                    x => x.LearnerID == id).ToList();
+            }
+        }
+
         public List<Post> GetListWithSectionLearner()
         {
             using(var c = new Context())
@@ -23,5 +32,6 @@ namespace DataAccessLayer.EntityFramework
                  .ToList();
             }
         }
+      
     }
 }

@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface ISectionService
+    public interface ISectionService: IGenericService<Section>
     {
-        void SectionAdd(Section s);
-        void SectionDelete(Section s);
-        void SectionUpdate(Section s);
-        List<Section> GetList();
-        Section GetById(int id);
+        
     }
 }

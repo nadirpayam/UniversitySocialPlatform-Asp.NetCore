@@ -1,0 +1,38 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Section> 
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Bölümler</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Bölüm Adı</th>
+    </tr>
+
+    @{
+        int counter = 1;
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@counter</td>
+                <td>@item.SectionName</td>
+                <td><a href="/Admin/Section/SectionDelete/@item.SectionID/" id="DeleteBtn" 
+                      onclick="return confirm('Silmek istediğinize emin misiniz?');" class="btn btn-danger">Pasif Yap</a></td>
+                <td><a href="#" class="btn btn-primary">Aktif Yap</a></td>
+                <td><a href="#" class="btn btn-success">Düzenle</a></td>
+            </tr>
+            counter++;
+        }
+    }
+</table>
+<a href="/Admin/Section/AddSection" class="btn btn-primary">Yeni Bölüm Ekle</a> <br />
+<br />
+
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new {page}))

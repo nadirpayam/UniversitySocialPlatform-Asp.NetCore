@@ -21,5 +21,7 @@ namespace EntityLayer.Concrete
         public List<Post> Posts { get; set; }
         public int LearnerTypeID { get; set; }
         public LearnerType LearnerType { get; set; }
+        public virtual ICollection<Messages> LearnerSender { get; set; }
+        public virtual ICollection<Messages> LearnerReceiver { get; set; }
     }
 }

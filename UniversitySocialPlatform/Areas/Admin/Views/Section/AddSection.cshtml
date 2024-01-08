@@ -1,0 +1,22 @@
+﻿@model EntityLayer.Concrete.Section
+@{
+    ViewData["Title"] = "AddSection";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Yeni Bölüm Girişi</h1>
+<br />
+
+@using (Html.BeginForm("AddSection", "Section", FormMethod.Post))
+{
+    @Html.Label("Bölüm Adı")
+    @Html.TextBoxFor(x => x.SectionName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.SectionName)
+    <br />
+    @Html.Label("Bölüm Açıklaması")
+    @Html.TextAreaFor(x => x.SectionDescription, 10, 3, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.SectionDescription)
+    <br />
+    <button class="btn btn-info">Ekle</button>
+}
+

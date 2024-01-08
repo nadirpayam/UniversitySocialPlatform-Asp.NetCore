@@ -1,0 +1,44 @@
+﻿@using EntityLayer.Concrete
+@model List<Post>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Son Gönderiler</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th># </th>
+                                <th> Gönderi Sahibi </th>
+                                <th> Gönderi Başlığı </th>
+                                <th> Gönderi Bölümü </th>
+                                <th> Gönderi Tarihi </th>
+                                <th> Detaylar </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <th>  <img src="~/LearnerTema/assets/images/faces/face1.jpg" class="mr-2" alt="image"></th>
+                                <td>
+                                    @item.Learner.LearnerName @item.Learner.LearnerSurname
+                                </td>
+                                <td> @item.PostTitle </td>
+                                <td>
+                                    <label class="badge badge-gradient-success">@item.Section.SectionName</label>
+                                </td>
+                                <td> @(((DateTime)item.PostCreateDate).ToString("dd MMM yyyy")) </td>
+                                <td><a href="/Post/PostReadAll/@item.PostID" class="btn btn-dark">Detaylar</a></td>
+                            </tr> 
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

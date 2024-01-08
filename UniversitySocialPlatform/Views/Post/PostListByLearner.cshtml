@@ -1,0 +1,35 @@
+﻿@using EntityLayer.Concrete
+@model List<Post>
+
+@{
+    ViewData["Title"] = "PostListByLearner";
+    Layout = "~/Views/Shared/LearnerLayout.cshtml";
+}
+
+<h1>Eğiticinin Gönderileri</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Başlık</th>
+        <th>Oluşturulma Tarihi</th>
+        <th>Bölümü</th>
+        <th>Durumu</th>r
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach(var item in Model)
+            {
+                <tr>
+                    <th>@item.PostID</th>
+                    <td>@item.PostTitle</td>
+                    <td> @(((DateTime)item.PostCreateDate).ToString("dd MMM yyyy"))</td>
+                    <td>@item.Section.SectionName</td>
+                    <td>@item.PostStatus</td>
+                    <td><a href="/Post/DeletePost/@item.PostID" class="btn btn-danger">Sil</a></td>
+                    <td><a href="/Post/EditPost/@item.PostID" class="btn btn-warning">Düzenle</a></td>
+                </tr>
+            }
+</table>
+
+<a href="/Post/PostAdd/" class="btn btn-info">Yeni Gönderi Oluştur</a>

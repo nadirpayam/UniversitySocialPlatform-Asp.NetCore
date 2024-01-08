@@ -45,8 +45,12 @@
                             <label for="validationCustom01">Şifre</label>
                             @Html.TextBoxFor(x => x.LearnerPassword, new { @class = "form-control" })
                             @Html.ValidationMessageFor(x => x.LearnerPassword, "", new { @class = "text-danger" })
-                           </div>
-                    </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            @Html.Label("Unvan")
+                            @Html.DropDownListFor(x => x.LearnerTypeID, (List<SelectListItem>)ViewBag.sv, new { @class = "form-control" })
+                        </div>
+                         </div>
                     <button type="submit" class="btn btn-primary submit mb-4">Kayıt Ol</button>
                     <p>
                         <a href="#" id="rules">Tüm şartları okudum,kabul ediyorum!</a>
