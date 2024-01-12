@@ -11,13 +11,11 @@
            
             <div class="row inner-sec">
                 <!--left-->
-                <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+                <div class="col-lg-12 left-blog-info-w3layouts-agileits text-left">
                     <div class="blog-grid-top">
 
-                        <div class="blog_info_left_grid">
-                            <a href="single.html">
-                                <img src="~/USPTema/images/b1.jpg" class="img-fluid" alt="">
-                            </a>
+                        <div class="blog_info_left_grid" style="margin-left: 350px;">
+                             <img src="/Images/logobuyuk400.jpg" class="img-fluid" alt="" >
                         </div>
                         <h3>
                             Biz Kimiz?
@@ -30,24 +28,6 @@
                             <a href="/Post/Index" class="btn btn-primary read-m">Gönderilere Dön</a>
                         </div>
                 </div>
-                <!--//left-->
-                <!--right-->
-                <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
-                    <div class="right-blog-info text-left">
-                        <div class="tech-btm">
-                            <img src="~/USPTema/images/banner1.jpg" class="img-fluid" alt="">
-                        </div>
-                        @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
-                        @await Html.PartialAsync("~/Views/About/SocialMediaAbout.cshtml")
-                    <div class="tech-btm">
-                        <h4>Son Gönderiler</h4>
-                        @await Component.InvokeAsync("LearnerLastPost")
-
-                    </div>
-                    </div>
-
-                </aside>
-                <!--//right-->
             </div>
         </div>
     </section>

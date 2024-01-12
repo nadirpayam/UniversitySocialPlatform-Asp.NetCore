@@ -1,0 +1,32 @@
+﻿@model EntityLayer.Concrete.Messages
+
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/Shared/LearnerLayout.cshtml";
+}
+
+
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Mesajı Gönder</h4> <br />
+
+                <div class="form-group">
+                    <label for="exampleInputName1">Gönderi Başlığı</label>
+                    @Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Gönderi İçeriği</label>
+                    @Html.TextBoxFor(x => x.MessageDetails, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Gönderilecek Kişiyi Seç")
+                    @Html.DropDownListFor(x => x.ReceiverID, (List<SelectListItem>)ViewBag.send, new { @class = "form-control" })
+                </div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Mesajı Gönder</button>
+            </div>
+        </div>
+    </div>
+</form>

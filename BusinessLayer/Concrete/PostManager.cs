@@ -67,5 +67,10 @@ namespace BusinessLayer.Concrete
         {
             _postDal.Update(t);
         }
+
+        public List<Post> GetListWithSectionLearnerSectionID(int id)
+        {
+            return _postDal.GetListWithSectionLearnerSectionID(id);
+        }
     }
 }

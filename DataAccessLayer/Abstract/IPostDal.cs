@@ -10,6 +10,7 @@ namespace DataAccessLayer.Abstract
     public interface IPostDal: IGenericDal<Post>
     {
         List<Post> GetListWithSectionLearner();
+        List<Post> GetListWithSectionLearnerSectionID(int id);
         List<Post> GetListWithSectionByLearner(int id);
     }
 }

@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Eğitici Ajax İşlemleri</h1>
+
+<br />
+
+<button type="button" id="btngetlist" class="btn btn-primary">Eğitici Listesi</button>
+<button type="button" id="btngetbyid" class="btn btn-success">Eğitici Getir</button>
+<button type="button" id="btnaddlearner" class="btn btn-info">Eğitici Ekle</button>
+<button type="button" id="btndeletelearner" class="btn btn-danger">Eğitici Sil</button>
+<button type="button" id="btnupdatelearner" class="btn btn-info">Eğiticiyü Güncelle</button>
+
+<br />
+
+<div id="learnerlist">
+    Buraya eğiticiler gelecek
+</div>
+<br />
+<div id="learnerget">
+    Buraya 1 eğitici gelecek
+</div>
+<br />
+<div>
+    <input type="text" id="learnerId" placeholder="Eğitici ID Değerini Girin" class="form-control" />
+</div>
+<br />
+
+<div>
+    <input type="text" id="txtID" placeholder="Silinecek Eğitici ID Değerini Girin" class="form-control" />
+</div>
+
+<div>
+    <br />
+    <input type="text" class="form-control" id="txtlearnerid" placeholder="Eğitici ID" />
+    <br />
+    <input type="text" class="form-control" id="txtlearnername" placeholder="Eğitici Adı" />
+    <br />
+</div>
+
+<br />
+
+<input type="text" id="updateidtxt" placeholder="Güncellenecek eğiticinin ID'si'" class="form-control" />
+<input type="text" id="updatenametxt" placeholder="Güncellenecek eğiticinin Adı'si'" class="form-control" />
+<br />
+
+
+
+@section scripts {
+    <script>
+        $("#btngetlist").click(function () {
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Admin/Learner/LearnerList",
+                success: function (func) {
+                    let w = jQuery.parseJSON(func);
+                    console.log(w);
+                    let tablehtml = "<table class=table table-bordered>" +
+                        "<tr> <th>Eğitici ID</th>  <th>Eğitici Adı</th></tr>";
+                    $.each(w, (index, value) => {
+                        tablehtml += `<tr><td>${value.Id}</td> <td>${value.Name}</td></tr>`
+                    });
+                    tablehtml += "</table>";
+                    $("#learnerlist").html(tablehtml);
+                }
+            });
+        });
+
+        $("#btngetbyid").click(x => {
+            let id = $("#learnerId").val();
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "get",
+                url: "/Admin/Learner/GetLearnerByID",
+                data: { learnerId: id },
+                success: function (func) {
+                    let w = jQuery.parseJSON(func);
+                    console.log(w);
+
+                    let getvalue = `<table class=table table-bordered> <tr> <th>Eğitici ID</th>
+                            <th> Eğitici Adı </th> </tr> <tr> <td>${w.Id} </td><td>${w.Name}</td></tr></table>`;
+                    $("#learnerget").html(getvalue);
+                }
+            });
+
+        })
+
+        $("#btnaddlearner").click(function () {
+            let learner = {
+                Id: $("#txtlearnerid").val(),
+                Name: $("#txtlearnername").val()
+            };
+            $.ajax({
+                type: "post",
+                url: "/Admin/Learner/AddLearner",
+                data: learner,
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    alert("Eğitici ekleme işlemi başarılı bir şekilde gerçekleşti");
+                }
+            })
+        })
+
+        $("#btndeletelearner").click(x => {
+            let id = $("#txtID").val();
+            $.ajax({
+                url: "/Admin/Learner/DeleteLearner/" + id,
+                type: "post",
+                dataType: "json",
+                success: function (func) {
+                    alert("yazar silindi");
+                }
+            });
+        });
+
+        $("#btnupdatelearner").click(function () {
+            let learner = {
+                Id: $("#updateidtxt").val(),
+                Name: $("#updatenametxt").val()
+            };
+
+            $.ajax({
+                type: "post",
+                url: "/Admin/Learner/UpdateLearner",
+                data: learner,
+                success: function (func) {
+                    alert("Güncelleme Yapıldı");
+                }
+            })
+        })
+
+    </script>
+}

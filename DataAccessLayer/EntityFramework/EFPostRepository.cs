@@ -32,6 +32,17 @@ namespace DataAccessLayer.EntityFramework
                  .ToList();
             }
         }
-      
+
+        public List<Post> GetListWithSectionLearnerSectionID(int id)
+        {
+            using (var c = new Context())
+            {
+                return c.Posts.Include(x => x.Section)
+                 .Include(x => x.Learner)
+                 .ThenInclude(y => y.LearnerType)
+                 .Where(p => p.SectionID == id)
+                 .ToList();
+            }
+        }
     }
 }

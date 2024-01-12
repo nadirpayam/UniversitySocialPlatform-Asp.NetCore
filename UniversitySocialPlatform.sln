@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33801.447
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversitySocialPlatform", "UniversitySocialPlatform\UniversitySocialPlatform.csproj", "{D8C8D4A0-1C79-4C80-85A3-A00EA7F078BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversitySocialPlatform", "UniversitySocialPlatform\UniversitySocialPlatform.csproj", "{D8C8D4A0-1C79-4C80-85A3-A00EA7F078BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLayer", "EntityLayer\EntityLayer.csproj", "{94DD6A56-1B3E-4D54-A06E-F2E4700CE53F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityLayer", "EntityLayer\EntityLayer.csproj", "{94DD6A56-1B3E-4D54-A06E-F2E4700CE53F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{427E1611-0A3C-412C-B8F9-D7C6081BD302}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{427E1611-0A3C-412C-B8F9-D7C6081BD302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{9AA88B2C-D7B5-4647-A98B-EB993BF3D27C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{9AA88B2C-D7B5-4647-A98B-EB993BF3D27C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreLayer", "CoreLayer\CoreLayer.csproj", "{1E46231B-ED10-460C-82AF-B21ABB8763C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLayer", "CoreLayer\CoreLayer.csproj", "{1E46231B-ED10-460C-82AF-B21ABB8763C1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatbotAI", "ChatbotAI\ChatbotAI.csproj", "{115C67B3-6B91-48AA-BF68-99CABA789F90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1E46231B-ED10-460C-82AF-B21ABB8763C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E46231B-ED10-460C-82AF-B21ABB8763C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E46231B-ED10-460C-82AF-B21ABB8763C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{115C67B3-6B91-48AA-BF68-99CABA789F90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{115C67B3-6B91-48AA-BF68-99CABA789F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{115C67B3-6B91-48AA-BF68-99CABA789F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{115C67B3-6B91-48AA-BF68-99CABA789F90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

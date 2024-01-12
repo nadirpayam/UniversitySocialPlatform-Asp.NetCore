@@ -25,7 +25,7 @@ namespace BusinessLayer.Concrete
 
         public List<Learner> GetList()
         {
-            throw new NotImplementedException();
+            return _leaernerDal.GetListAll();
         }
 
         

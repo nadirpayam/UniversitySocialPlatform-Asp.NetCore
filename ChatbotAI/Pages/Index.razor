@@ -1,0 +1,96 @@
+﻿@page "/"
+@using Newtonsoft.Json;
+@using System.Text;
+
+<div class="cont">
+    <div class="left-panel">
+        <button @onclick="() => SendDefaultQuestion(default1)" class="btn btn-warning" style="background-color: rgb(76, 175, 80)">Staj nasıl bulunur?</button>
+        <button @onclick="() => SendDefaultQuestion(default2)" class="btn btn-warning" style="background-color: rgb(76, 175, 80)">Üniversite okumanın önemi nedir?</button>
+        <button @onclick="() => SendDefaultQuestion(default3)" class="btn btn-warning" style="background-color: rgb(76, 175, 80)">Sınavlara nasıl çalışır?</button>
+        <button @onclick="() => SendDefaultQuestion(default4)" class="btn btn-warning" style="background-color: rgb(76, 175, 80)">Erasmus detayları nelerdir?</button>
+    </div>
+    <div class="right-panel">
+
+        <div class="messages">
+            @for (int i = 0; i < messages.Count; i++)
+            {
+                @if (i % 2 == 0)
+                {
+                    <div class="question">@messages[i]</div>
+                }
+                else
+                {
+                    <div class="response">@messages[i]</div>
+                }
+            }
+        </div>
+        <div class="textMessage">
+            <input @bind="message" @onkeyup="HandleKeyPress" />
+            <button @onclick="SendMessage">Gönder</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    public string default1 = "Staj nasıl bulunur?";
+    public string default2 = "Üniversite okumanın önemi nedir?";
+    public string default3 = "Sınavlara nasıl çalışır?";
+    public string default4 = "Erasmus detayları nelerdir?";
+
+    public string message;
+    public string testing;
+    public List<string> messages = new List<string>();
+    private static HttpClient Http = new HttpClient();
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    public async Task HandleKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await SendMessage();
+            message = "";
+        }
+    }
+
+    public async Task SendMessage()
+    {
+        var promptMessage = " Lütfen doğruluğundan %100 emin olduğun bilgileri ver, eğer cevabından emin değilsen sadece 'Bilmiyorum' diyerek yanıtla.";
+        Http = new HttpClient();
+        messages.Add(message + promptMessage);
+
+        // Replace [INSERT_YOUR_OWN_API_KEY] with a valid OpenAI API key
+        var apiKey = "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";
+        Http.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+
+        // JSON content for the API call
+        var jsonContent = new
+        {
+            prompt = message,
+            model = "gpt-3.5-turbo-instruct",
+            max_tokens = 1000
+        };
+
+        message = "";
+
+        // Make the API call
+        var responseContent = await Http.PostAsync("https://api.openai.com/v1/completions", new StringContent(JsonConvert.SerializeObject(jsonContent), Encoding.UTF8, "application/json"));
+
+        // Read the response as a string
+        var resContext = await responseContent.Content.ReadAsStringAsync();
+
+        // Deserialize the response into a dynamic object
+        var data = JsonConvert.DeserializeObject<dynamic>(resContext);
+        messages.Add(data.choices[0].text.ToString());
+        StateHasChanged();
+    }
+
+    public async Task SendDefaultQuestion(string defaultQuestion)
+    {
+        message = defaultQuestion;
+        await SendMessage();
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "6T995OFWxwTM+TKIWh2gHb8dCr4Gj08z8oiHKbg2lZaJgGlDv2BZcaqIdGg9LZ5dHmuVlnl2mGhEYztHaiyOWg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nadirpayam\\Desktop\\MyProjects\\UniversitySocialPlatform\\ChatBotApp\\ChatBotApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nadirpayam\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

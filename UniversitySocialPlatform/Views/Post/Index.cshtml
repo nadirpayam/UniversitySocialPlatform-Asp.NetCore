@@ -8,55 +8,55 @@
 }
 
 
+
 <section class="main-content-w3layouts-agileits">
     <div class="container">
-        <h3 class="tittle">Gönderiler</h3>
+        <h3 class="tittle">GÖNDERİLER</h3>
         <div class="inner-sec">
             <!--left-->
             <div class="left-blog-info-w3layouts-agileits text-left">
                 <div class="row">
                     @foreach (var item in Model)
                     {
-                    <div class="col-lg-4 card">
-                        <h5 class="card-title">
-                            <a href="/Post/PostReadAll/@item.PostID">@item.PostTitle</a>
-                        </h5>
+                        <br /><br />
+                        <div class="col-lg-4 card">
+                            <div class="card-body">
+                                <ul class="blog-icons">
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-user"></i> @item.Learner.LearnerName  @item.Learner.LearnerSurname
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-calendar-alt"></i> @(((DateTime)item.PostCreateDate).ToString("dd MMM yyyy"))
+                                        </a>
+                                    </li>
 
-                        @if (item.PostImage != "" || item.PostImage != null)
-                        {
-                            <a href="single.html">
-                                <img src=@item.PostImage class="card-img-top img-fluid" alt="">
-                            </a>
-                        }
-                      <p class="card-text mb-3"></p>@item.PostContent
-                        <div class="card-body">
-                            <ul class="blog-icons my-2">
-                                <li>
-                                    <a href="#">
-                                        <i class="far fa-user"></i> @item.Learner.LearnerName  @item.Learner.LearnerSurname
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-eye"></i> @item.Learner.LearnerType.LearnerTypeName
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="blog-icons my-2">
-                                <li>
-                                    <a href="#">
-                                        <i class="far fa-calendar-alt"></i> @(((DateTime)item.PostCreateDate).ToString("dd MMM yyyy"))
-                                    </a>
-                                </li>
-                                <li class="mx-2">
-                                    <a href="#">
-                                        <i class="far fa-comment"></i> 0
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="/Post/PostReadAll/@item.PostID" class="btn btn-primary read-m">Devamını Oku</a>
-                    </div> }
+                                </ul>
+                                <ul class="blog-icons">
+                                    <li>
+                                        <a href="/Post/PostReadAll/@item.PostID">
+                                            <i class="fas fa-eye"></i> @item.Section.SectionName Köşe'sinden bir gönderi, iyi okumalar :)
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            @if (item.PostImage != "" || item.PostImage != null)
+                            {
+                                <a href="/Post/PostReadAll/@item.PostID">
+                                    <img src=@item.PostImage class="card-img-top img-fluid" alt="">
+                                </a>
+                            }
+                            <h5 class="card-title">
+                                <a href="/Post/PostReadAll/@item.PostID">@item.PostTitle</a>
+                            </h5>
+                            <p class="card-text mb-3"></p>@item.PostContent.Substring(0, 300)...
+
+                            <a href="/Post/PostReadAll/@item.PostID" class="btn btn-primary read-m">Devamını Oku</a>
+                        </div>}
                 </div>
                 <!--//left-->
             </div>

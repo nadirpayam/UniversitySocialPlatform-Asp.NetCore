@@ -1,0 +1,28 @@
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace UniversitySocialPlatform.ViewComponents.Learner
+{
+    public class LearnerPosts: ViewComponent
+    {
+        LearnerManager lm = new LearnerManager(new EFLearnerRepository());
+        Context c = new Context();
+
+        PostManager pm = new PostManager(new EFPostRepository());
+        public IViewComponentResult Invoke()
+        {
+            var username = User.Identity.Name;
+            ViewBag.abo = username;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var learnerID = c.Learners.Where(x => x.LearnerMail == usermail).Select(x => x.LearnerID).FirstOrDefault();
+            var values = pm.GetPostListByLearner(learnerID);
+            return View(values);
+        }
+    }
+}

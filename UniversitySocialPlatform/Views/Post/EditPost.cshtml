@@ -5,20 +5,36 @@
     Layout = "~/Views/Shared/LearnerLayout.cshtml";
 }
 
-<h1>Gönderi Düzenleme Sayfası</h1>
 
-@using (Html.BeginForm("EditPost", "Post", FormMethod.Post))
-{
-    @Html.Label("Post ID")
-    @Html.TextBoxFor(x => x.PostID, new { @class = "form-control" })
-    <br />
-    @Html.Label("Gönderi Başlığı")
-    @Html.TextBoxFor(x => x.PostTitle, new { @class = "form-control" })
-    <br />
-    @Html.Label("Gönderi İçeriği")
-    @Html.TextAreaFor(x => x.PostContent, 10, 3, new { @class = "form-control" })
-    <br />
-    @Html.Label("Bölüm")
-    @Html.DropDownListFor(x => x.SectionID, (List<SelectListItem>)ViewBag.sv, new { @class = "form-control" })
-    <button class="btn btn-success">Güncelle</button>
-}
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Gönderi Düzenleme Sayfası</h4> <br />
+                @Html.HiddenFor(x => x.PostID, new { @class = "form-control" })
+                <div class="forms-sample">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Ad</label>
+                        @Html.TextBoxFor(x => x.PostTitle, new { @class = "form-control" })
+                    </div>
+                    <label>Görsel</label>
+                    <input type="file" name="ImageFile" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                        <input type="file" name="ImageFile" />
+                    </div><br />
+                    <div class="form-group">
+                        @Html.Label("Unvan")
+                        @Html.DropDownListFor(x => x.SectionID, (List<SelectListItem>)ViewBag.sv, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">İçerik</label>
+                        @Html.TextAreaFor(x => x.PostContent, 10, 3, new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">Kaydet</button>
+                    <button class="btn btn-light">İptal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

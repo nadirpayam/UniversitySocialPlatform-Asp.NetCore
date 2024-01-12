@@ -18,7 +18,7 @@ namespace DataAccessLayer.EntityFramework
             using (var c = new Context())
             {
                 return c.AllMessages.Include(x => x.SenderLearner).ThenInclude(y => y.LearnerType).Where(
-                    x => x.SenderID == id || x.ReceiverID==id).ToList();
+                    x => x.ReceiverID == id).ToList();
             }
         }
 

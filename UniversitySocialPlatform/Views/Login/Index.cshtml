@@ -1,4 +1,5 @@
-﻿@model EntityLayer.Concrete.Learner
+﻿@model UserSignInViewModel
+
 
 @{
     ViewData["Title"] = "Index";
@@ -14,11 +15,11 @@
                 <form method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1 mb-2">Mail Adresiniz</label>
-                        @Html.TextBoxFor(x => x.LearnerMail, new { @class = "form-control" })
+                        <input type="text" class="form-control" asp-for="@Model.username" name="username" />
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1 mb-2">Şifreniz</label>
-                        @Html.TextBoxFor(x => x.LearnerPassword, new { @class = "form-control" })
+                        <input type="password" class="form-control"asp-for="@Model.password" name="password" />
                     </div>
                     <div class="form-check mb-2">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">

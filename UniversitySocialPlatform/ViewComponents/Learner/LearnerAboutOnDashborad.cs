@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,14 @@ namespace UniversitySocialPlatform.ViewComponents.Learner
     {
         LearnerManager lm = new LearnerManager(new EFLearnerRepository());
         Context c = new Context();
+
+
         public IViewComponentResult Invoke()
         {
-            var learnerMail = User.Identity.Name;
-            var learnerID = c.Learners.Where(x => x.LearnerMail == learnerMail).Select(x => x.LearnerID).FirstOrDefault();
+            var username = User.Identity.Name;
+            ViewBag.abo = username;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var learnerID = c.Learners.Where(x => x.LearnerMail == usermail).Select(x => x.LearnerID).FirstOrDefault();
             var values = lm.GetLearnerById(learnerID);
             return View(values);
         }

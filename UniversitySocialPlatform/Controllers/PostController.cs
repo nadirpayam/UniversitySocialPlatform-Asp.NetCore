@@ -11,10 +11,13 @@ using System.Threading.Tasks;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccessLayer.Concrete;
+using UniversitySocialPlatform.Models;
+using System.IO;
 
 namespace UniversitySocialPlatform.Controllers
 {
    
+    [AllowAnonymous]
     public class PostController : Controller
     {
         PostManager pm = new PostManager(new EFPostRepository());
@@ -26,16 +29,24 @@ namespace UniversitySocialPlatform.Controllers
             return View(values);
         }
 
+        public IActionResult ListBySectionId(int id)
+        {
+            var values = pm.GetListWithSectionLearnerSectionID(id);
+            return View("Index",values);
+        }
+
         public IActionResult PostReadAll(int id)
         {
             ViewBag.PostId = id;
             var values = pm.GetPostById(id);
+            ViewBag.lastPost = id;
             return View(values);
         }
 
         public IActionResult PostListByLearner()
         {
-            var learnerMail = User.Identity.Name;
+            var username = User.Identity.Name;
+            var learnerMail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var learnerID = c.Learners.Where(x => x.LearnerMail == learnerMail).Select(x => x.LearnerID).FirstOrDefault();
             var values = pm.GetListWithSectionByLearnerPm(learnerID);
             return View(values);
@@ -44,43 +55,44 @@ namespace UniversitySocialPlatform.Controllers
         [HttpGet]
         public IActionResult PostAdd()
         {
-            List<SelectListItem> sectionValues = (from x in sm.GetList()
+            List<SelectListItem> learnerValues = (from x in sm.GetList()
                                                   select new SelectListItem
                                                   {
                                                       Text = x.SectionName,
                                                       Value = x.SectionID.ToString()
                                                   }).ToList();
-            ViewBag.sv = sectionValues;
+            ViewBag.bolum = learnerValues;
             return View();
         }
 
         [HttpPost]
-        public IActionResult PostAdd(Post p)
+        public IActionResult PostAdd(PostAddClass p)
         {
-            PostValidator validationRules = new PostValidator();
-            ValidationResult results = validationRules.Validate(p);
-
-            var learnerMail = User.Identity.Name;
-            var learnerID = c.Learners.Where(x => x.LearnerMail == learnerMail).Select(x => x.LearnerID).FirstOrDefault();
-
-            if (results.IsValid)
+            Post post = new Post();
+            if (p.PostImage != null)
             {
-                p.PostStatus = true;
-                p.LearnerID = learnerID;
-                p.PostCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                pm.TAdd(p);
-                return RedirectToAction("PostListByLearner", "Post");
+                var extension = Path.GetExtension(p.PostImage.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/", newImageName);
+                var stream = new FileStream(location, FileMode.Create);
+                p.PostImage.CopyTo(stream);
+                post.PostImage = "/Images/" +newImageName;
             }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-                return View();
-            }
+            post.PostContent = p.PostContent;
+            post.PostCreateDate = DateTime.Now;
+            post.PostTitle = p.PostTitle;
+            post.PostStatus = true;
+
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+
+            var learnerId = c.Learners.Where(x => x.LearnerMail == usermail).Select(x => x.LearnerID).FirstOrDefault();
+
+            post.LearnerID = learnerId;
+            post.SectionID = p.SectionID;
+            pm.TAdd(post);
+            return RedirectToAction("PostListByLearner", "Post");
         }
-
         public IActionResult DeletePost(int id)
         {
             var postValue = pm.TGetById(id);
@@ -105,7 +117,17 @@ namespace UniversitySocialPlatform.Controllers
         [HttpPost]
         public IActionResult EditPost(Post p)
         {
-            var learnerMail = User.Identity.Name;
+            if (p.ImageFile != null)
+            {
+                var extension = Path.GetExtension(p.ImageFile.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/", newImageName);
+                var stream = new FileStream(location, FileMode.Create);
+                p.ImageFile.CopyTo(stream);
+                p.PostImage = "/Images/" + newImageName;
+            }
+            var username = User.Identity.Name;
+            var learnerMail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var learnerID = c.Learners.Where(x => x.LearnerMail == learnerMail).Select(x => x.LearnerID).FirstOrDefault();
             p.LearnerID = learnerID;
             p.PostCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());

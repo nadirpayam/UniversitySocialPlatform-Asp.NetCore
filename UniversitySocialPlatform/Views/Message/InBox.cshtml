@@ -14,21 +14,28 @@
 <table class="table table-bordered">
     <tr>
         <th>#</th>
-        <th>Konu</th>
+        <th>Başlık</th>
         <th>Gönderen</th>
         <th>Tarih</th>
         <th>Mesajı Aç</th>
     </tr>
+
+    @{
+        int counter = 1;
+    }
+
     @foreach (var item in Model)
     {
         <tr>
-            <th>@item.MessageID</th>
+            <td>@counter</td>
             <td>@item.Subject</td>
             <td>@item.SenderLearner.LearnerName @item.SenderLearner.LearnerSurname</td>
-            <td> @(((DateTime)item.MessageDate).ToString("dd MMM yyyy"))</td>
+            <td>@(((DateTime)item.MessageDate).ToString("dd MMM yyyy"))</td>
             <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-danger">Mesajı Aç</a></td>
         </tr>
+
+        counter++;
     }
 </table>
 
-<a href="/Post/PostAdd/" class="btn btn-info">Yeni Mesaj Oluştur</a>
+<a href="/Message/SendMessage/" class="btn btn-info">Mesaj Oluştur</a>

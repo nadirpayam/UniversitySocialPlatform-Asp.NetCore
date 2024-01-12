@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +19,8 @@ namespace EntityLayer.Concrete
         public string LearnerAbout { get; set; }
         public string LearnerImage { get; set; }
         public string LearnerMail { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
         public string LearnerPassword { get; set; }
         public bool LearnerStatus { get; set; }
         public List<Post> Posts { get; set; }

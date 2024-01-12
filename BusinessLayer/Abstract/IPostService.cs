@@ -12,5 +12,6 @@ namespace BusinessLayer.Abstract
         List<Post> GetListWithSectionLearner();
         List<Post> GetPostListByLearner(int id);
         List<Post> GetPostById(int id);
+        List<Post> GetListWithSectionLearnerSectionID(int id);
     }
 }

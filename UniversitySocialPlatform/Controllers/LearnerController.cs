@@ -63,14 +63,15 @@ namespace UniversitySocialPlatform.Controllers
         [HttpGet]
         public IActionResult LearnerEditProfile()
         {
-            List<SelectListItem> values = (from x in lt.GetList()
+            List<SelectListItem> learnerValuesd = (from x in lt.GetList()
                                                   select new SelectListItem
                                                   {
                                                       Text = x.LearnerTypeName,
                                                       Value = x.LearnerTypeID.ToString()
                                                   }).ToList();
-            ViewBag.svlearner = values;
-            var learnerMail = User.Identity.Name;
+            ViewBag.type = learnerValuesd;
+            var username = User.Identity.Name;
+            var learnerMail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var learnerID = c.Learners.Where(x => x.LearnerMail == learnerMail).Select(x => x.LearnerID).FirstOrDefault();
             var learnerValues = lm.TGetById(learnerID);
             return View(learnerValues);
@@ -80,22 +81,19 @@ namespace UniversitySocialPlatform.Controllers
         [HttpPost]
         public IActionResult LearnerEditProfile(Learner learner)
         {
-            LearnerValidator validationRules = new LearnerValidator();
-            ValidationResult results = validationRules.Validate(learner);
-            if (results.IsValid)
+            if (learner.ImageFile != null)
             {
-                learner.LearnerStatus = true;
-                lm.TUpdate(learner);
-                return RedirectToAction("Index", "Dashboard");
+                var extension = Path.GetExtension(learner.ImageFile.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/", newImageName);
+                var stream = new FileStream(location, FileMode.Create);
+                learner.ImageFile.CopyTo(stream);
+                learner.LearnerImage = "/Images/" + newImageName;
             }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-                return View();
-            }
+            learner.LearnerStatus = true;
+            
+            lm.TUpdate(learner);
+            return RedirectToAction("PostListByLearner", "Post");
         }
 
       
@@ -125,7 +123,7 @@ namespace UniversitySocialPlatform.Controllers
             l.LearnerPassword = learner.LearnerPassword;
             l.LearnerMail = learner.LearnerMail;
             l.LearnerAbout = learner.LearnerAbout;
-            l.LearnerTypeID = 1;
+            l.LearnerTypeID = learner.LearnerID;
             lm.TAdd(l);
             return View();
         }

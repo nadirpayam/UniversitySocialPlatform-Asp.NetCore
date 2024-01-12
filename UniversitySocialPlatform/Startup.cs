@@ -1,3 +1,5 @@
+using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -26,8 +28,17 @@ namespace UniversitySocialPlatform
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<Context>();
+            services.AddIdentity<AppUser, AppRole>(x =>
+            {
+                x.Password.RequireUppercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequiredLength = 3;
+                x.Password.RequireLowercase = false;
+            }).AddEntityFrameworkStores<Context>();
+
             services.AddControllersWithViews();
-            
+
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -59,7 +70,7 @@ namespace UniversitySocialPlatform
                 app.UseHsts();
             }
 
-            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404","?code={0}");
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404", "?code={0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -67,15 +78,22 @@ namespace UniversitySocialPlatform
             app.UseAuthentication();
             app.UseAuthorization();
 
+            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                   name: "adminRoute",
+                   pattern: "admin/{*catch-all}",
+                   defaults: new { controller = "AdminLogin", action = "Index" });
+
+                endpoints.MapControllerRoute(
                 name: "areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                pattern: "{area:exists}/{controller=AdminLogin}/{action=Index}/{id?}"
                 );
-                  endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                  name: "default",
+                  pattern: "{controller=Post}/{action=Index}/{id?}");
             });
         }
     }
